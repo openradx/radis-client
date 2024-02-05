@@ -12,8 +12,16 @@ python = "^3.10"
 requests = "^2.31.0"
 
 [tool.poetry.group.dev.dependencies]
-ipykernel = "^6.29.0"
 invoke = "^2.2.0"
+ipykernel = "^6.29.0"
+ipython = "^8.21.0"
+pyright = "^1.1.349"
+pytest = "^8.0.0"
+ruff = "^0.2.0"
+
+[tool.pyright]
+typeCheckingMode = "basic"
+reportUnnecessaryTypeIgnoreComment = true
 
 [build-system]
 requires = ["poetry-core"]

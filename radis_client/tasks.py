@@ -15,6 +15,15 @@ def run_cmd(ctx: Context, cmd: str, silent=False) -> Result:
 
 
 @task
+def lint(ctx: Context):
+    """Lint the source code (ruff, pyright)"""
+    cmd_ruff = "poetry run ruff ."
+    run_cmd(ctx, cmd_ruff)
+    cmd_pyright = "poetry run pyright"
+    run_cmd(ctx, cmd_pyright)
+
+
+@task
 def publish_client(ctx: Context):
     """Publish RADIS Client to PyPI
 
