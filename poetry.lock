@@ -309,6 +309,17 @@ files = [
 ]
 
 [[package]]
+name = "invoke"
+version = "2.2.0"
+description = "Pythonic task execution"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "invoke-2.2.0-py3-none-any.whl", hash = "sha256:6ea924cc53d4f78e3d98bc436b08069a03077e6f85ad1ddaa8a116d7dad15820"},
+    {file = "invoke-2.2.0.tar.gz", hash = "sha256:ee6cbb101af1a859c7fe84f2a264c059020b0cb7fe3535f9424300ab568f6bd5"},
+]
+
+[[package]]
 name = "ipykernel"
 version = "6.29.0"
 description = "IPython Kernel for Jupyter"
@@ -870,4 +881,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "9e80e66d96ddad3d86fac06fae4592669e8a88aa5eecc3a4fb34ec035a687f34"
+content-hash = "decdbb8c03ac526f3df5743448bddfee52b0e464191a213041e42b74b41e98aa"
