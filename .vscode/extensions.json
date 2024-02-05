@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "charliermarsh.ruff",
+    "davidanson.vscode-markdownlint",
+    "eamodio.gitlens",
+    "foxundermoon.shell-format",
+    "mhutchie.git-graph",
+    "mikestead.dotenv",
+    "ms-pyright.pyright",
+    "ms-python.python",
+    "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
+    "wayou.vscode-todo-highlight"
+  ]
+}
