@@ -5,7 +5,6 @@ tasks:
   - name: setup
     init: |
       poetry install
-    command: |
       poetry run invoke init-workspace
 
 vscode:
