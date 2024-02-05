@@ -1,0 +1,23 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: setup
+    init: |
+      poetry install
+    command: |
+      poetry run invoke init-workspace
+
+vscode:
+  extensions:
+    - "charliermarsh.ruff"
+    - "davidanson.vscode-markdownlint"
+    - "eamodio.gitlens"
+    - "foxundermoon.shell-format"
+    - "mhutchie.git-graph"
+    - "mikestead.dotenv"
+    - "ms-pyright.pyright"
+    - "ms-python.python"
+    - "streetsidesoftware.code-spell-checker"
+    - "tamasfe.even-better-toml"
+    - "wayou.vscode-todo-highlight"
