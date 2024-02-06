@@ -21,6 +21,7 @@ python-dotenv = "^1.0.1"
 ruff = "^0.2.0"
 
 [tool.pyright]
+ignore = ["**/*.ipynb"]
 typeCheckingMode = "basic"
 reportUnnecessaryTypeIgnoreComment = true
 
