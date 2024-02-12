@@ -43,3 +43,12 @@ def publish_client(ctx: Context):
     - Execute with `invoke publish-client`
     """
     run_cmd(ctx, "poetry publish --build")
+
+
+@task
+def show_outdated(ctx: Context):
+    """Show outdated dependencies"""
+    print("### Outdated Python dependencies ###")
+    poetry_cmd = "poetry show --outdated --top-level"
+    result = run_cmd(ctx, poetry_cmd)
+    print(result.stderr.strip())
