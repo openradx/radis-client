@@ -42,5 +42,4 @@ def publish_client(ctx: Context):
     - Set version in radis_client/pyproject.toml
     - Execute with `invoke publish-client`
     """
-    with ctx.cd("radis_client"):
-        run_cmd(ctx, "poetry publish --build")
+    run_cmd(ctx, "poetry publish --build")

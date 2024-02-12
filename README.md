@@ -9,7 +9,7 @@ RADIS Client is the official Python client of [RADIS (Radiology Report Archive a
 ### Prerequisites
 
 - Generate an API token in your RADIS profile.
-- Make sure to have the permissions to access the RADIS API.
+- Make sure you have the permissions to access the RADIS API.
 - Also make sure you have the permissions for the resources you like to access.
 
 ### Code
