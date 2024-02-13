@@ -25,6 +25,10 @@ ignore = ["**/*.ipynb"]
 typeCheckingMode = "basic"
 reportUnnecessaryTypeIgnoreComment = true
 
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "DJ"]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
