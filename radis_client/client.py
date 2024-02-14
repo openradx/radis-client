@@ -11,7 +11,7 @@ class ReportData(TypedDict):
     pacs_name: str
     patient_id: str
     patient_birth_date: date
-    patient_sex: Literal["F", "M", "U"]
+    patient_sex: Literal["M", "F", "O"]
     study_instance_uid: str
     accession_number: str
     study_description: str
