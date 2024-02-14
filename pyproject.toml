@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "radis-client"
-version = "0.1.1"
+version = "0.1.2"
 description = "RADIS client library to connect to a RADIS server."
 authors = ["Kai Schlamp <kai.schlamp@gmail.com>"]
 license = "GPL-3.0-or-later"
