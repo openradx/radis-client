@@ -19,7 +19,7 @@ class ReportData(TypedDict):
     series_instance_uid: str
     modalities_in_study: list[str]
     sop_instance_uid: str
-    references: list[str]
+    links: list[str]
     body: str
 
 
