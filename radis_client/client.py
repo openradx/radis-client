@@ -6,6 +6,7 @@ import requests
 
 class ReportData(TypedDict):
     document_id: str
+    language: str
     groups: list[int]
     pacs_aet: str
     pacs_name: str
