@@ -52,7 +52,7 @@ filterwarnings = [
 
 [tool.ruff]
 line-length = 100
-select = ["E", "F", "I", "DJ"]
+lint.select = ["E", "F", "I", "DJ"]
 
 [build-system]
 requires = ["poetry-core"]
