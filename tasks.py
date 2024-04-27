@@ -28,7 +28,7 @@ def init_workspace(ctx: Context):
 @task
 def lint(ctx: Context):
     """Lint the source code (ruff, pyright)"""
-    cmd_ruff = "poetry run ruff ."
+    cmd_ruff = "poetry run ruff check ."
     run_cmd(ctx, cmd_ruff)
     cmd_pyright = "poetry run pyright"
     run_cmd(ctx, cmd_pyright)
