@@ -24,6 +24,10 @@ python-dotenv = "^1.0.1"
 radis = { git = "https://github.com/openradx/radis.git" }
 ruff = "^0.3.4"
 
+[tool.ruff]
+line-length = 100
+lint.select = ["E", "F", "I", "DJ"]
+
 [tool.pyright]
 ignore = ["**/*.ipynb"]
 typeCheckingMode = "basic"
@@ -49,10 +53,6 @@ filterwarnings = [
     "ignore:'cgi' is deprecated:DeprecationWarning",
     "ignore:.*No directory at.*staticfiles.*:UserWarning",
 ]
-
-[tool.ruff]
-line-length = 100
-lint.select = ["E", "F", "I", "DJ"]
 
 [build-system]
 requires = ["poetry-core"]

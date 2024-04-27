@@ -1,10 +1,10 @@
 from datetime import date, datetime
 
 import pytest
-from radis.accounts.models import User
-from radis.core.utils.auth_utils import add_user_to_group
+from adit_radis_shared.accounts.models import User
+from adit_radis_shared.common.utils.auth_utils import add_user_to_group
+from adit_radis_shared.token_authentication.models import Token
 from radis.reports.models import Group
-from radis.token_authentication.models import Token
 
 from radis_client.client import ReportData
 
