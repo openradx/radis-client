@@ -86,6 +86,20 @@ def ci(ctx: Context):
 
 
 @task
+def try_github_actions(ctx: Context):
+    """Try Github Actions locally using Act"""
+    act_path = project_dir / "bin" / "act"
+    if not act_path.exists():
+        print("Installing act...")
+        ctx.run(
+            "curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash",
+            hide=True,
+            pty=True,
+        )
+    ctx.run(f"{act_path} -P ubuntu-latest=catthehacker/ubuntu:act-latest", pty=True)
+
+
+@task
 def bump_version(ctx: Context, rule: Literal["patch", "minor", "major"]):
     """Bump version, create a tag, commit and push to GitHub"""
     result = ctx.run("git status --porcelain", hide=True, pty=True)

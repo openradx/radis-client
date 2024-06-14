@@ -1,0 +1,45 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12"]
+        poetry-version: ["1.8.2"]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up Poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install dependencies
+        run: poetry install --with dev
+      - name: Configure environment
+        run: poetry run invoke init-workspace
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Start PostgreSQL container
+        run: docker compose up -d
+      - name: Run linting
+        # https://github.com/actions/runner/issues/241#issuecomment-745902718
+        shell: 'script -q -e -c "bash {0}"'
+        run: poetry run invoke lint
+      - name: Run tests
+        shell: 'script -q -e -c "bash {0}"'
+        run: poetry run invoke test --cov
+      - name: Stop PostgreSQL container
+        if: ${{ always() }}
+        run: docker compose down --remove-orphans --volumes
