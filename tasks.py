@@ -1,22 +1,30 @@
+import sys
 from pathlib import Path
 from shutil import copy
 
 from invoke.context import Context
-from invoke.runners import Result
 from invoke.tasks import task
 
 project_dir = Path(__file__).resolve().parent
 
 
-def run_cmd(ctx: Context, cmd: str, silent=False) -> Result:
-    if not silent:
-        print(f"Running: {cmd}")
+###
+# Helper functions
+###
 
-    hide = True if silent else None
 
-    result = ctx.run(cmd, pty=True, hide=hide)
+def check_container_up(ctx: Context, container_name):
+    result = ctx.run("docker ps", hide=True, warn=True)
     assert result and result.ok
-    return result
+    for line in result.stdout.splitlines():
+        if container_name in line:
+            return True
+    return False
+
+
+###
+# Tasks
+###
 
 
 @task
@@ -29,9 +37,51 @@ def init_workspace(ctx: Context):
 def lint(ctx: Context):
     """Lint the source code (ruff, pyright)"""
     cmd_ruff = "poetry run ruff check ."
-    run_cmd(ctx, cmd_ruff)
+    ctx.run(cmd_ruff, pty=True)
     cmd_pyright = "poetry run pyright"
-    run_cmd(ctx, cmd_pyright)
+    ctx.run(cmd_pyright, pty=True)
+
+
+@task
+def test(
+    ctx: Context,
+    path: str | None = None,
+    cov: bool | str = False,
+    html: bool = False,
+    keyword: str | None = None,
+    mark: str | None = None,
+    stdout: bool = False,
+    failfast: bool = False,
+):
+    """Run the test suite"""
+    if not check_container_up(ctx, "postgres"):
+        sys.exit("Tests need a running PostgreSQL database.\nRun 'docker compose up -d' first.")
+
+    cmd = "pytest "
+    if cov:
+        cmd += "--cov "
+        if isinstance(cov, str):
+            cmd += f"={cov} "
+        if html:
+            cmd += "--cov-report=html"
+    if keyword:
+        cmd += f"-k {keyword} "
+    if mark:
+        cmd += f"-m {mark} "
+    if stdout:
+        cmd += "-s "
+    if failfast:
+        cmd += "-x "
+    if path:
+        cmd += path
+    ctx.run(cmd, pty=True)
+
+
+@task
+def ci(ctx: Context):
+    """Run the continuous integration (linting and tests)"""
+    lint(ctx)
+    test(ctx, cov=True)
 
 
 @task
@@ -42,7 +92,7 @@ def publish_client(ctx: Context):
     - Set version in radis_client/pyproject.toml
     - Execute with `invoke publish-client`
     """
-    run_cmd(ctx, "poetry publish --build")
+    ctx.run("poetry publish --build", pty=True)
 
 
 @task
@@ -50,5 +100,6 @@ def show_outdated(ctx: Context):
     """Show outdated dependencies"""
     print("### Outdated Python dependencies ###")
     poetry_cmd = "poetry show --outdated --top-level"
-    result = run_cmd(ctx, poetry_cmd)
+    result = ctx.run(poetry_cmd, pty=True)
+    assert result and result.ok
     print(result.stderr.strip())
