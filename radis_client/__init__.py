@@ -1,3 +1,3 @@
-from .client import RadisClient
+from .client import RadisClient, ReportData
 
-__all__ = ["RadisClient"]
+__all__ = ["RadisClient", "ReportData"]
