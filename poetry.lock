@@ -2924,7 +2924,7 @@ whitenoise = "^6.0.0"
 type = "git"
 url = "https://github.com/openradx/radis.git"
 reference = "HEAD"
-resolved_reference = "6171def5b645eab34187a8a527e8e828a69e9b01"
+resolved_reference = "139d9dba4a1282aa0bf0620bf7420d81cb83daea"
 
 [[package]]
 name = "redis"

@@ -12,13 +12,13 @@ class ReportData:
     groups: list[int]
     pacs_aet: str
     pacs_name: str
+    pacs_link: str
     patient_id: str
     patient_birth_date: date
     patient_sex: Literal["M", "F", "O"]
     study_description: str
     study_datetime: datetime
     modalities: list[str]
-    links: list[str]
     metadata: dict[str, str]
     body: str
 
