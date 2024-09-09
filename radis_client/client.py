@@ -18,6 +18,8 @@ class ReportData:
     patient_sex: Literal["M", "F", "O"]
     study_description: str
     study_datetime: datetime
+    study_instance_uid: str
+    accession_number: str
     modalities: list[str]
     metadata: dict[str, str]
     body: str
