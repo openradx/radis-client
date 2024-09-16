@@ -34,10 +34,10 @@ def report_data():
         patient_sex="M",
         study_description="CT of the Thorax",
         study_datetime=datetime(2000, 8, 10, 11, 37),
+        study_instance_uid="34343-34343-34343",
+        accession_number="345348389",
         modalities=["CT", "PET"],
         metadata={
-            "study_instance_uid": "34343-34343-34343",
-            "accession_number": "345348389",
             "series_instance_uid": "34343-676556-3343",
             "sop_instance_uid": "35858-384834-3843",
         },
