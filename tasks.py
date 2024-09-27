@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 from shutil import copy
 
-from adit_radis_shared.invoke_tasks import bump_version, lint, show_outdated  # noqa: F401
+from adit_radis_shared.invoke_tasks import show_outdated  # noqa: F401
 from invoke.context import Context
 from invoke.tasks import task
 
@@ -67,6 +67,16 @@ def test(
     if path:
         cmd += path
     ctx.run(cmd, pty=True)
+
+
+@task
+def lint(ctx: Context):
+    """Lint the source code (ruff, djlint, pyright)"""
+    print("Linting Python code with ruff...")
+    ctx.run("poetry run ruff check .", pty=True)
+
+    print("Linting Python code with pyright...")
+    ctx.run("poetry run pyright", pty=True)
 
 
 @task
