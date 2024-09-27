@@ -23,4 +23,5 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 # Poetry is already installed in the base Gitpod Python image,
 # but we need to upgrade it
 RUN poetry self update && \
+    poetry self add "poetry-dynamic-versioning[plugin]" && \
     poetry completions bash >> ~/.bash_completion

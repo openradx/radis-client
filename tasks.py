@@ -83,8 +83,8 @@ def lint(ctx: Context):
 def publish_client(ctx: Context):
     """Publish RADIS Client to PyPI
 
+    - Make sure you released a new version with tag in GitHub
     - Make sure PyPI API token is set: poetry config pypi-token.pypi your-api-token
-    - Make sure to bump the version (see `bump_version` above)
     - Execute with `invoke publish-client`
     """
     ctx.run("poetry publish --build", pty=True)

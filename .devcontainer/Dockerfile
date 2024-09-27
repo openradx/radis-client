@@ -14,4 +14,5 @@ RUN pipx install invoke && \
     invoke --print-completion-script=bash >> ~/.bash_completion
 
 RUN pipx install poetry && \
+    pipx inject poetry "poetry-dynamic-versioning[plugin]" && \
     poetry completions bash >> ~/.bash_completion
