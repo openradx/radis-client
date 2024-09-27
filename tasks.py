@@ -1,8 +1,8 @@
 import sys
 from pathlib import Path
 from shutil import copy
-from typing import Literal
 
+from adit_radis_shared.invoke_tasks import bump_version, lint, show_outdated  # noqa: F401
 from invoke.context import Context
 from invoke.tasks import task
 
@@ -32,15 +32,6 @@ def check_container_up(ctx: Context, container_name):
 def init_workspace(ctx: Context):
     """Initialize workspace"""
     copy(f"{project_dir}/example.env", f"{project_dir}/.env")
-
-
-@task
-def lint(ctx: Context):
-    """Lint the source code (ruff, pyright)"""
-    cmd_ruff = "poetry run ruff check ."
-    ctx.run(cmd_ruff, pty=True)
-    cmd_pyright = "poetry run pyright"
-    ctx.run(cmd_pyright, pty=True)
 
 
 @task
@@ -79,43 +70,6 @@ def test(
 
 
 @task
-def ci(ctx: Context):
-    """Run the continuous integration (linting and tests)"""
-    lint(ctx)
-    test(ctx, cov=True)
-
-
-@task
-def try_github_actions(ctx: Context):
-    """Try Github Actions locally using Act"""
-    act_path = project_dir / "bin" / "act"
-    if not act_path.exists():
-        print("Installing act...")
-        ctx.run(
-            "curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash",
-            hide=True,
-            pty=True,
-        )
-    ctx.run(f"{act_path} -P ubuntu-latest=catthehacker/ubuntu:act-latest", pty=True)
-
-
-@task
-def bump_version(ctx: Context, rule: Literal["patch", "minor", "major"]):
-    """Bump version, create a tag, commit and push to GitHub"""
-    result = ctx.run("git status --porcelain", hide=True, pty=True)
-    assert result and result.ok
-    if result.stdout.strip():
-        print("There are uncommitted changes. Aborting.")
-        sys.exit(1)
-
-    ctx.run(f"poetry version {rule}", pty=True)
-    ctx.run("git add pyproject.toml", pty=True)
-    ctx.run("git commit -m 'Bump version'", pty=True)
-    ctx.run('git tag -a v$(poetry version -s) -m "Release v$(poetry version -s)"', pty=True)
-    ctx.run("git push --follow-tags", pty=True)
-
-
-@task
 def publish_client(ctx: Context):
     """Publish RADIS Client to PyPI
 
@@ -124,13 +78,3 @@ def publish_client(ctx: Context):
     - Execute with `invoke publish-client`
     """
     ctx.run("poetry publish --build", pty=True)
-
-
-@task
-def show_outdated(ctx: Context):
-    """Show outdated dependencies"""
-    print("### Outdated Python dependencies ###")
-    poetry_cmd = "poetry show --outdated --top-level"
-    result = ctx.run(poetry_cmd, pty=True)
-    assert result and result.ok
-    print(result.stderr.strip())
