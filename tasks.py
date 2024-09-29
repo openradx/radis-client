@@ -35,6 +35,16 @@ def init_workspace(ctx: Context):
 
 
 @task
+def lint(ctx: Context):
+    """Lint the source code (ruff, djlint, pyright)"""
+    print("Linting Python code with ruff...")
+    ctx.run("poetry run ruff check .", pty=True)
+
+    print("Linting Python code with pyright...")
+    ctx.run("poetry run pyright", pty=True)
+
+
+@task
 def test(
     ctx: Context,
     path: str | None = None,
@@ -67,24 +77,3 @@ def test(
     if path:
         cmd += path
     ctx.run(cmd, pty=True)
-
-
-@task
-def lint(ctx: Context):
-    """Lint the source code (ruff, djlint, pyright)"""
-    print("Linting Python code with ruff...")
-    ctx.run("poetry run ruff check .", pty=True)
-
-    print("Linting Python code with pyright...")
-    ctx.run("poetry run pyright", pty=True)
-
-
-@task
-def publish_client(ctx: Context):
-    """Publish RADIS Client to PyPI
-
-    - Make sure you released a new version with tag in GitHub
-    - Make sure PyPI API token is set: poetry config pypi-token.pypi your-api-token
-    - Execute with `invoke publish-client`
-    """
-    ctx.run("poetry publish --build", pty=True)

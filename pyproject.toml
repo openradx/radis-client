@@ -12,7 +12,7 @@ python = ">=3.12,<4.0"
 requests = "^2.31.0"
 
 [tool.poetry.group.dev.dependencies]
-adit-radis-shared = { git = "https://github.com/openradx/adit-radis-shared.git", rev = "v0.6.8", python = ">=3.12,<4.0" }
+adit-radis-shared = { git = "https://github.com/openradx/adit-radis-shared.git", rev = "0.6.8", python = ">=3.12,<4.0" }
 invoke = "^2.2.0"
 ipykernel = "^6.29.0"
 ipython = "^8.21.0"
