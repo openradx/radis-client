@@ -45,6 +45,16 @@ def lint(ctx: Context):
 
 
 @task
+def format(ctx: Context):
+    """Format the source code with ruff and djlint"""
+    print("Formatting Python code with ruff...")
+    ctx.run("poetry run ruff format .", pty=True)
+
+    print("Sorting Python imports with ruff...")
+    ctx.run("poetry run ruff check . --fix --select I", pty=True)
+
+
+@task
 def test(
     ctx: Context,
     path: str | None = None,
