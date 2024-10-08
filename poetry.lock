@@ -2419,8 +2419,8 @@ xlsxwriter = "^3.2.0"
 [package.source]
 type = "git"
 url = "https://github.com/openradx/radis.git"
-reference = "HEAD"
-resolved_reference = "3f8c5dfe8576097d90c84f1f12456f979c913fcb"
+reference = "0.0.1"
+resolved_reference = "e3e9543e414949081b99f7269e5a815b86dea243"
 
 [[package]]
 name = "requests"
@@ -2922,4 +2922,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<4.0"
-content-hash = "7d21d9f18e3615c848451aba38a8ca465ae017a35816e1726243558f30359014"
+content-hash = "beda76e2432be8c7027a494116d2d4e67eb3fb50e5aa0f982f44704182c8a69a"
