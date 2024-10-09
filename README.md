@@ -19,3 +19,7 @@ server_url = "https://radis" # The host URL of the RADIS server
 auth_token = "my_token" # The authentication token generated in your profile
 client = RadisClient(server_url=server_url, auth_token=auth_token)
 ```
+
+## License
+
+- AGPL 3.0 or later

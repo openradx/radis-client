@@ -44,14 +44,13 @@ class RadisClient:
         self._headers = {"Authorization": f"Token {self.auth_token}"}
 
     def create_report(self, report_data: ReportData) -> dict[str, Any]:
-        """
-        Create a report using the provided data and return the response as a dictionary.
+        """Create a report using the provided data and return the response as a dictionary.
 
         Args:
-            data (ReportData): The data to be used for creating the report.
+            data: The data to be used for creating the report.
 
         Returns:
-            dict[str, Any]: The response from the report creation request.
+            The response from the report creation request.
         """
         response = requests.post(
             self._reports_url, json=report_data.to_dict(), headers=self._headers
@@ -60,16 +59,15 @@ class RadisClient:
         return response.json()
 
     def retrieve_report(self, document_id: str, full: bool = False) -> dict[str, Any]:
-        """
-        Retrieve a report with the given document ID.
+        """Retrieve a report with the given document ID.
 
         Args:
-            document_id (str): The ID of the document to retrieve.
-            full (bool, optional): Whether to retrieve also document data from Vespa.
+            document_id: The ID of the document to retrieve.
+            full: Whether to retrieve also document data from Vespa.
                 Defaults to False.
 
         Returns:
-            dict[str, Any]: The retrieved report in dictionary format.
+            The retrieved report in dictionary format.
         """
         response = requests.get(
             f"{self._reports_url}{document_id}/",
@@ -82,17 +80,17 @@ class RadisClient:
     def update_report(
         self, document_id: str, report_data: ReportData, upsert=False
     ) -> dict[str, Any]:
-        """
-        Update a report with the given document ID and report data.
+        """Update a report with the given document ID and report data.
+
         Partial updates are not supported.
 
         Args:
-            document_id (str): The ID of the document to be updated.
-            data (ReportData): The report data to be updated.
-            upsert (bool): Whether to perform an upsert if the document is not found.
+            document_id: The ID of the document to be updated.
+            data: The report data to be updated.
+            upsert: Whether to perform an upsert if the document is not found.
 
         Returns:
-            dict[str, Any]: The response as JSON.
+            The response as JSON.
         """
         response = requests.put(
             f"{self._reports_url}{document_id}/",
@@ -108,10 +106,7 @@ class RadisClient:
         Deletes a report with the given document_id.
 
         Args:
-            document_id (str): The ID of the document to be deleted.
-
-        Returns:
-            None
+            document_id: The ID of the document to be deleted.
         """
         response = requests.delete(f"{self._reports_url}{document_id}/", headers=self._headers)
         response.raise_for_status()
