@@ -1,12 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": ["config:recommended", "group:allNonMajor"],
   "lockFileMaintenance": { "enabled": true },
   "packageRules": [
     {
       "managers": ["docker-compose"],
       "matchPackageNames": ["postgres"],
-      "allowedVersions": "<=16"
+      "allowedVersions": "<=17"
     },
     {
       "managers": ["dockerfile"],
