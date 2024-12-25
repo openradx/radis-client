@@ -1,16 +1,14 @@
 from datetime import date, datetime
 
-import pytest
 from adit_radis_shared.accounts.models import User
-from adit_radis_shared.common.utils.auth_utils import add_user_to_group
+from adit_radis_shared.common.utils.testing_helpers import add_user_to_group
 from adit_radis_shared.token_authentication.models import Token
 from radis.reports.models import Group
 
 from radis_client.client import ReportData
 
 
-@pytest.fixture
-def admin_with_group_and_token():
+def create_admin_with_group_and_token():
     user: User = User.objects.create_superuser("admin")
     group = Group.objects.create(name="Staff")
     add_user_to_group(user, group)
@@ -18,8 +16,7 @@ def admin_with_group_and_token():
     return user, group, token
 
 
-@pytest.fixture
-def report_data():
+def create_report_data():
     group = Group.objects.create(name="Thoraxklinik")
 
     return ReportData(
