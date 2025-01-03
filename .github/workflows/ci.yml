@@ -1,9 +1,9 @@
-name: CI
+name: Run Continuous Integration
 on:
-  pull_request:
   push:
     branches: [main]
-    tags: ["[0-9]+.[0-9]+.[0-9]+"]
+  pull_request:
+    branches: [main]
 jobs:
   ci:
     strategy:
@@ -43,29 +43,3 @@ jobs:
       - name: Stop PostgreSQL container
         if: ${{ always() }}
         run: docker compose down --remove-orphans --volumes
-  publish:
-    name: Publish package to PyPI
-    if: github.event_name == 'push' && github.ref_type == 'tag'
-    runs-on: ubuntu-latest
-    environment: release
-    permissions:
-      id-token: write
-    needs:
-      - ci
-    steps:
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Set up Poetry
-        uses: abatilo/actions-poetry@v3
-        with:
-          poetry-version: "1.8.2"
-      - name: Add poetry dynamic versioning plugin
-        run: poetry self add poetry-dynamic-versioning
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Build wheel and sdist
-        run: poetry build
-      - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
