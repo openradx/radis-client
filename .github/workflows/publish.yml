@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Set up Poetry
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
         with:
           poetry-version: "1.8.2"
       - name: Add poetry dynamic versioning plugin
