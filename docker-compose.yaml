@@ -3,6 +3,6 @@ services:
     image: postgres:17.2
     hostname: postgres.local
     environment:
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
