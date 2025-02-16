@@ -7,7 +7,3 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 USER vscode
-
-RUN pipx install poetry \
-  && pipx inject poetry "poetry-dynamic-versioning[plugin]" \
-  && poetry completions bash >> ~/.bash_completion

@@ -26,10 +26,10 @@ def lint():
     """Lint the source code (ruff, djlint, pyright)"""
 
     print("Linting Python code with ruff...")
-    helpers.execute_cmd("poetry run ruff check .")
+    helpers.execute_cmd("uv run ruff check .")
 
     print("Linting Python code with pyright...")
-    helpers.execute_cmd("poetry run pyright")
+    helpers.execute_cmd("uv run pyright")
 
 
 @app.command()
@@ -37,10 +37,10 @@ def format_code():
     """Format the source code with ruff and djlint"""
 
     print("Formatting Python code with ruff...")
-    helpers.execute_cmd("poetry run ruff format .")
+    helpers.execute_cmd("uv run ruff format .")
 
     print("Sorting Python imports with ruff...")
-    helpers.execute_cmd("poetry run ruff check . --fix --select I")
+    helpers.execute_cmd("uv run ruff check . --fix --select I")
 
 
 @app.command(context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
