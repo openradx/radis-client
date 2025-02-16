@@ -59,3 +59,7 @@ def test(ctx: typer.Context):
 
     cmd = f"pytest {' '.join(ctx.args)}"
     helpers.execute_cmd(cmd)
+
+
+if __name__ == "__main__":
+    app()
