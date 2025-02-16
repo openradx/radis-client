@@ -9,19 +9,17 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Set up Poetry
-        uses: abatilo/actions-poetry@v4
-        with:
-          poetry-version: "1.8.2"
-      - name: Add poetry dynamic versioning plugin
-        run: poetry self add poetry-dynamic-versioning
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.0"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
       - name: Build wheel and sdist
-        run: poetry build
+        run: uv build
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
