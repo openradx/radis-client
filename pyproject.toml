@@ -11,7 +11,7 @@ dependencies = ["requests"]
 [dependency-groups]
 dev = [
     "adit-radis-shared @ git+https://github.com/openradx/adit-radis-shared.git@0.14.0",
-    "factory-boy<=3.3.2",
+    "factory-boy<=3.3.3",
     "ipykernel",
     "ipython",
     "pyright",
