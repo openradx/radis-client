@@ -1,8 +1,11 @@
 # RADIS Client
 
+> [!IMPORTANT]
+> This repository is archived and the source code has been moved to the [RADIS main repository](https://github.com/openradx/radis).
+
 ## About
 
-RADIS Client is the official Python client of [RADIS (Radiology Report Archive and Discovery System)](https://github.com/openradx/adit).
+RADIS Client is the official Python client of [RADIS (Radiology Report Archive and Discovery System)](https://github.com/openradx/radis).
 
 ## Usage
 
